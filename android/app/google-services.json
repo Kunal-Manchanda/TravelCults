@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "541048295976",
+    "project_id": "travel-cults",
+    "storage_bucket": "travel-cults.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541048295976:android:d4c26e0fd86e79cc609b1d",
+        "android_client_info": {
+          "package_name": "com.example.travel_cults"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "541048295976-arf56ugegqj8l3cloqfj5st2v762cvi2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkKHAtWPq-sPwdziKTQC173z-c16T2_bw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "541048295976-arf56ugegqj8l3cloqfj5st2v762cvi2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
