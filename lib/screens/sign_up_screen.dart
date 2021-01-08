@@ -98,30 +98,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               SizedBox(height: size.height * 0.1),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "assets/images/logo.png",
-                                    height: 50,
-                                    width: 50,
-                                  ),
-                                  Text(
-                                    "TravelCults",
-                                    style: GoogleFonts.merienda(
-                                      fontSize: 30,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                ],
+                              Hero(
+                                tag: "authIcon",
+                                child: Image.asset(
+                                  "assets/images/logo_text.png",
+                                  height: size.width * 0.35,
+                                  width: size.width * 1,
+                                ),
                               ),
                               Text(
-                                "Travel with no regrets",
-                                style: GoogleFonts.nunito(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w200),
+                                "Travel without regrets",
+                                style: GoogleFonts.merienda(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                               SizedBox(height: size.height * 0.1),
                               Container(
@@ -207,21 +198,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 onTap: () {
                                   if (emailController.text.isEmpty) {
                                     SnackBar snackbar = SnackBar(
-                                        content:
-                                            Text("The email cannot be null"));
+                                      content: Text("The email cannot be null"),
+                                    );
                                     scaffoldKey.currentState
                                         .showSnackBar(snackbar);
                                   } else if (passwordController.text.isEmpty) {
                                     SnackBar snackbar = SnackBar(
-                                        content: Text(
-                                            "The password cannot be null"));
+                                      content:
+                                          Text("The password cannot be null"),
+                                    );
                                     scaffoldKey.currentState
                                         .showSnackBar(snackbar);
                                   } else if (!RegExp(
                                           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                       .hasMatch(emailController.text)) {
                                     SnackBar snackbar = SnackBar(
-                                        content: Text("Invalid email format"));
+                                      content: Text("Invalid email format"),
+                                    );
                                     scaffoldKey.currentState
                                         .showSnackBar(snackbar);
                                   } else {
@@ -247,8 +240,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
-                              SizedBox(height: size.height * 0.03),
-                                   InkWell(
+                              SizedBox(
+                                height: size.height * 0.03,
+                              ),
+                              InkWell(
                                 onTap: () =>
                                     signUpWithGoogle().then((result) => {
                                           if (result != null)
@@ -262,7 +257,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Icon(FontAwesomeIcons.google,
                                           color: Colors.white, size: 20),

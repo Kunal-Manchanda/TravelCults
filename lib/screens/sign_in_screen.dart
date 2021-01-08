@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -93,30 +94,21 @@ class _SignInScreenState extends State<SignInScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               SizedBox(height: size.height * 0.1),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "assets/images/logo.png",
-                                    height: 50,
-                                    width: 50,
-                                  ),
-                                  Text(
-                                    "TravelCults",
-                                    style: GoogleFonts.merienda(
-                                      fontSize: 30,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                ],
+                              Hero(
+                                tag: "authIcon",
+                                child: Image.asset(
+                                  "assets/images/logo_text.png",
+                                  height: size.width * 0.35,
+                                  width: size.width * 1,
+                                ),
                               ),
                               Text(
-                                "Travel with no regrets",
-                                style: GoogleFonts.nunito(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w200),
+                                "Travel without regrets",
+                                style: GoogleFonts.merienda(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                               SizedBox(height: size.height * 0.1),
                               Container(

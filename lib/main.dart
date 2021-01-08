@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_cults/screens/detailScreen/filter_page.dart';
 import 'package:travel_cults/screens/navigation_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -9,12 +10,12 @@ void main() async{
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: NavigationScreen(),
+      home: FilterPage(),
+      // NavigationScreen(),
     );
   }
 }

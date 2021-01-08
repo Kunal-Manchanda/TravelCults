@@ -1,6 +1,9 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:travel_cults/components/auth_buttons.dart';
 import 'package:travel_cults/constants.dart';
 import 'package:travel_cults/screens/sign_in_screen.dart';
 import 'package:travel_cults/screens/sign_up_screen.dart';
@@ -17,108 +20,69 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Material(
       child: Container(
         decoration: BoxDecoration(
-            image: DecorationImage(
-          image: NetworkImage("https://i.imgur.com/g2bgaz8.jpg"),
-          colorFilter: ColorFilter.mode(kPrimaryColor, BlendMode.overlay),
-          fit: BoxFit.cover,
-          alignment: Alignment.center,
-        )),
+          image: DecorationImage(
+            image: NetworkImage("https://i.imgur.com/g2bgaz8.jpg"),
+            colorFilter: ColorFilter.mode(kPrimaryColor, BlendMode.overlay),
+            fit: BoxFit.cover,
+            alignment: Alignment.center,
+          ),
+        ),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 0.8, sigmaY: 0.8),
+          filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
           child: Container(
             color: kPrimaryColor.withOpacity(.6),
             child: Column(
               children: [
-                // ClipPath(
-                //   child: Container(
-                //     width: MediaQuery.of(context).size.width,
-                //     height: 80,
-                //     color: Colors.white,
-                //   ),
-                //   clipper: Clipper(),
-                // ),
                 SizedBox(height: size.height * 0.15),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/images/logo.png",
-                      height: 50,
-                      width: 50,
-                    ),
-                    Text(
-                      "TravelCults",
-                      style: GoogleFonts.merienda(
-                        fontSize: 30,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ],
+                Hero(
+                  tag: "authIcon",
+                  child: Image.asset(
+                    "assets/images/logo_text.png",
+                    height: size.width * 0.35,
+                    width: size.width * 1,
+                  ),
                 ),
                 Text(
-                  "Travel with no regrets",
-                  style: GoogleFonts.nunito(
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w200),
+                  "Travel without regrets",
+                  style: GoogleFonts.merienda(
+                    fontSize: 15,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-                SizedBox(height: size.height * 0.45),
-                RoundedButton(
+                SizedBox(
+                  height: size.height * 0.35,
+                ),
+                AuthButtons(
                   size: size,
-                  color: Colors.white.withOpacity(0.3),
+                  color: Colors.white.withOpacity(0.25),
                   title: "Sign in",
                   titleColor: Colors.white,
-                  onPressed: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignInScreen())),
+                  onPressed: () => Navigator.push(
+                    context,
+                    PageTransition(
+                      type: PageTransitionType.fade,
+                      child: SignInScreen(),
+                    ),
+                  ),
                 ),
-                SizedBox(height: size.height * 0.03),
-                RoundedButton(
+                SizedBox(
+                  height: size.height * 0.03,
+                ),
+                AuthButtons(
                   size: size,
-                  color: Colors.white.withOpacity(0.3),
+                  color: Colors.white.withOpacity(0.25),
                   title: "Sign up",
                   titleColor: Colors.white,
-                  onPressed: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignUpScreen())),
+                  onPressed: () => Navigator.push(
+                    context,
+                    PageTransition(
+                      type: PageTransitionType.fade,
+                      child: SignUpScreen(),
+                    ),
+                  ),
                 ),
               ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class RoundedButton extends StatelessWidget {
-  final color, title, titleColor, onPressed;
-  const RoundedButton({
-    Key key,
-    @required this.size,
-    this.color,
-    this.title,
-    this.onPressed,
-    this.titleColor,
-  }) : super(key: key);
-
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        height: size.height * 0.07,
-        width: size.width * 0.8,
-        decoration: BoxDecoration(
-            color: color, borderRadius: BorderRadius.circular(10)),
-        child: Center(
-          child: Text(
-            title,
-            style: GoogleFonts.nunito(
-              fontSize: 18,
-              color: titleColor,
-              fontWeight: FontWeight.w700,
             ),
           ),
         ),

@@ -28,15 +28,16 @@ class _DetailsScreenState extends State<DetailsScreen> {
         child: InkWell(
           onTap: () => print('tap on close'),
           child: Container(
-              child: Center(
-                child: Text(
-            "Plan My Holiday",
-            style: GoogleFonts.nunito(
-                color: Colors.white,
-                fontSize: 20,
+            child: Center(
+              child: Text(
+                "Plan My Holiday",
+                style: GoogleFonts.nunito(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
             ),
           ),
-              )),
         ),
       ),
       body: SingleChildScrollView(
@@ -47,10 +48,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
               height: size.height * 0.3,
               width: size.width,
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                image: NetworkImage(widget.image),
-                fit: BoxFit.fill,
-              )),
+                image: DecorationImage(
+                  image: NetworkImage(widget.image),
+                  fit: BoxFit.fill,
+                ),
+              ),
               child: Stack(
                 children: [
                   Align(
@@ -69,8 +71,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   Align(
                     alignment: Alignment.topLeft,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 40, horizontal: 20),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 40,
+                        horizontal: 20,
+                      ),
                       child: GestureDetector(
                         onTap: () => Navigator.pop(context),
                         child: Icon(
@@ -83,7 +87,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 ],
               ),
             ),
-            SizedBox(height: size.height * 0.03),
+            SizedBox(
+              height: size.height * 0.03,
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 25),
               child: Text(
@@ -105,7 +111,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     fontWeight: FontWeight.w800),
               ),
             ),
-            SizedBox(height: size.height * 0.03),
+            SizedBox(
+              height: size.height * 0.03,
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 25),
               child: Text(
@@ -116,7 +124,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     fontWeight: FontWeight.w800),
               ),
             ),
-            SizedBox(height: size.height * 0.02),
+            SizedBox(
+              height: size.height * 0.02,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -138,18 +148,22 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 ),
               ],
             ),
-            SizedBox(height: size.height * 0.03),
+            SizedBox(
+              height: size.height * 0.03,
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 25),
               child: Text(
-                "Polpular Hotels",
+                "Popular Hotels",
                 style: GoogleFonts.nunito(
                     fontSize: 25,
                     color: Colors.indigo[900],
                     fontWeight: FontWeight.w800),
               ),
             ),
-            SizedBox(height: size.height * 0.02),
+            SizedBox(
+              height: size.height * 0.02,
+            ),
             CarouselSlider(
               options: CarouselOptions(
                 height: 200.0,

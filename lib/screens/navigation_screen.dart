@@ -18,7 +18,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
         if (this.mounted) {
           setState(() {
             isSigned = true;
-            print(user.uid);
           });
         }
       } else {
@@ -33,7 +32,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(isSigned);
     return Scaffold(
       body: isSigned ? HomeScreen() : WelcomeScreen(),
     );
