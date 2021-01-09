@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:travel_cults/screens/navigation_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:travel_cults/screens/splash_screen.dart';
+
+import 'screens/home_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,8 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
-    
+      home: HomeScreen(),
+      // SplashScreen(),
     );
   }
 }

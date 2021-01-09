@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<Map<String, String>> topDestinations = [
     {
-      'title': 'Goa',
+      'title': 'Andaman',
       'image':
           'https://www.oyorooms.com/travel-guide/wp-content/uploads/2020/07/Goa.jpg',
       'description':
@@ -88,7 +88,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
+
     return Material(
       child: Stack(
         children: [
@@ -99,28 +100,32 @@ class _HomeScreenState extends State<HomeScreen> {
                 ClipPath(
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    height: 80,
+                    height: size.width * 0.2,
                     color: Colors.white,
                   ),
                   clipper: Clipper(),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(25),
+                  padding: EdgeInsets.all(size.width * 0.06),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Hi, User \nYou are in New Delhi",
-                          style: GoogleFonts.nunito(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontWeight: FontWeight.w600)),
+                      Text(
+                        "Hi, User \nYou are in New Delhi",
+                        style: GoogleFonts.nunito(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                       IconButton(
-                          icon: Icon(
-                            Icons.search,
-                            color: Colors.white,
-                            size: 35,
-                          ),
-                          onPressed: null),
+                        icon: Icon(
+                          Icons.search,
+                          color: Colors.white,
+                          size: 35,
+                        ),
+                        onPressed: null,
+                      ),
                       // IconButton(
                       //     icon: Icon(Icons.logout),
                       //     onPressed: () {
@@ -139,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       SizedBox(width: 10),
                       Text(
-                        "27 C",
+                        "27 °C",
                         style: GoogleFonts.nunito(
                             color: Colors.white, fontSize: 22),
                       ),
@@ -147,38 +152,47 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.only(
+                    top: 30,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       HomeButtons(
-                          icon: "assets/icons/flight.png",
-                          content: "Flight",
-                          iconColor: Colors.white),
+                        icon: "assets/icons/flight.png",
+                        content: "Flight",
+                        iconColor: Colors.white,
+                      ),
                       HomeButtons(
-                          icon: "assets/icons/hotel.png",
-                          content: "Hotel",
-                          iconColor: Colors.white),
+                        icon: "assets/icons/hotel.png",
+                        content: "Hotel",
+                        iconColor: Colors.white,
+                      ),
                       HomeButtons(
-                          icon: "assets/icons/car.png",
-                          content: "Cars",
-                          iconColor: Colors.white),
+                        icon: "assets/icons/car.png",
+                        content: "Cars",
+                        iconColor: Colors.white,
+                      ),
                       HomeButtons(
-                          icon: "assets/icons/train.png",
-                          content: "Train",
-                          iconColor: Colors.white),
+                        icon: "assets/icons/train.png",
+                        content: "Train",
+                        iconColor: Colors.white,
+                      ),
                     ],
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(
+                  height: 20,
+                ),
                 Expanded(
                   child: Container(
                     width: size.width,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30)),
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
                     ),
                     child: StaggeredGridView.countBuilder(
                       padding: EdgeInsets.all(20),
@@ -187,21 +201,26 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemCount: topDestinations.length,
                       itemBuilder: (BuildContext context, int index) => InkWell(
                         onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PreviewScreen(
-                                      title: topDestinations[index]['title'],
-                                      image: topDestinations[index]['image'],
-                                      description: topDestinations[index]
-                                          ['description'],
-                                    ))),
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PreviewScreen(
+                              title: topDestinations[index]['title'],
+                              image: topDestinations[index]['image'],
+                              description: topDestinations[index]
+                                  ['description'],
+                            ),
+                          ),
+                        ),
                         child: Container(
                           decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      topDestinations[index]['image']),
-                                  fit: BoxFit.cover),
-                              borderRadius: BorderRadius.circular(20)),
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                topDestinations[index]['image'],
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                           child: Stack(
                             children: [
                               Align(
@@ -217,9 +236,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                         constraints: BoxConstraints(
                                             maxWidth: size.width * 0.2),
                                         decoration: BoxDecoration(
-                                            color: Colors.grey.withOpacity(0.7),
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
+                                          color: Colors.grey.withOpacity(0.7),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
                                         child: FittedBox(
                                           fit: BoxFit.fitWidth,
                                           child: Row(
@@ -231,9 +251,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                               Text(
                                                 topDestinations[index]['title'],
                                                 style: GoogleFonts.nunito(
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.w700),
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
                                               )
                                             ],
                                           ),
@@ -275,14 +295,28 @@ class _HomeScreenState extends State<HomeScreen> {
               height: size.height * 0.07,
               width: size.width * 0.6,
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
+                color: Colors.white,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  IconButton(icon: Icon(Icons.home), onPressed: null),
-                  IconButton(icon: Icon(Icons.add_circle, color: kPrimaryColor,), onPressed: null),
-                  IconButton(icon: Icon(Icons.person), onPressed: null),
+                  IconButton(
+                    icon: Icon(Icons.home),
+                    onPressed: null,
+                  ),
+                  IconButton(
+                      icon: Icon(
+                        Icons.add_circle,
+                        color: kPrimaryColor,
+                      ),
+                      onPressed: null),
+                  IconButton(
+                    icon: Icon(Icons.person),
+                    onPressed: null,
+                  ),
                 ],
               ),
             ),

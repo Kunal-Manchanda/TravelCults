@@ -24,9 +24,12 @@ class _FilterPageState extends State<FilterPage> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          leading: Icon(
-            FontAwesomeIcons.times,
-            color: Colors.black,
+          leading: InkWell(
+            onTap: () => Navigator.pop(context),
+            child: Icon(
+              FontAwesomeIcons.times,
+              color: Colors.black,
+            ),
           ),
           title: Text("Filters"),
           actions: [

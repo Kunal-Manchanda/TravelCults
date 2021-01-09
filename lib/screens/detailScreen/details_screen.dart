@@ -1,9 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:travel_cults/components/detailsComponents/hotel_slider_item.dart';
 import 'package:travel_cults/components/detailsComponents/stats_indicator.dart';
 import 'package:travel_cults/constants.dart';
+import 'package:travel_cults/screens/package_screen.dart';
 
 class DetailsScreen extends StatefulWidget {
   final image;
@@ -26,7 +28,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
         height: 60,
         color: kPrimaryColor,
         child: InkWell(
-          onTap: () => print('tap on close'),
+          onTap: () => Navigator.push(
+            context,
+            PageTransition(
+              child: PackageScreen(),
+              type: PageTransitionType.fade,
+              duration: Duration(milliseconds: 400),
+            ),
+          ),
           child: Container(
             child: Center(
               child: Text(
