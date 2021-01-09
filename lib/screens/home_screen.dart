@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:travel_cults/components/clipper.dart';
 import 'package:travel_cults/components/homeComponents/home_buttons.dart';
 import 'package:travel_cults/constants.dart';
@@ -14,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool isLiked = false;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   List<Map<String, String>> topDestinations = [
     {
@@ -79,179 +81,213 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  // void signOutGoogle() async {
+  //   await _googleSignIn.signOut();
+  //   print("User Sign Out");
+  // }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Material(
-      child: Container(
-        color: kPrimaryColor,
-        child: Column(
-          children: [
-            ClipPath(
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 80,
-                color: Colors.white,
-              ),
-              clipper: Clipper(),
-            ),
-            Padding(
-              padding: EdgeInsets.all(25),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Hi, User \nYou are in New Delhi",
-                      style: GoogleFonts.nunito(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600)),
-                  IconButton(
-                      icon: Icon(
-                        Icons.search,
-                        color: Colors.white,
-                        size: 35,
-                      ),
-                      onPressed: null)
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25),
-              child: Row(
-                children: [
-                  Icon(
-                    FontAwesomeIcons.cloudSunRain,
+      child: Stack(
+        children: [
+          Container(
+            color: kPrimaryColor,
+            child: Column(
+              children: [
+                ClipPath(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 80,
                     color: Colors.white,
                   ),
-                  SizedBox(width: 10),
-                  Text(
-                    "27 C",
-                    style:
-                        GoogleFonts.nunito(color: Colors.white, fontSize: 22),
+                  clipper: Clipper(),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(25),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Hi, User \nYou are in New Delhi",
+                          style: GoogleFonts.nunito(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w600)),
+                      IconButton(
+                          icon: Icon(
+                            Icons.search,
+                            color: Colors.white,
+                            size: 35,
+                          ),
+                          onPressed: null),
+                      // IconButton(
+                      //     icon: Icon(Icons.logout),
+                      //     onPressed: () {
+                      // signOutGoogle();
+                      //     })
+                    ],
                   ),
-                ],
-              ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25),
+                  child: Row(
+                    children: [
+                      Icon(
+                        FontAwesomeIcons.cloudSunRain,
+                        color: Colors.white,
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        "27 C",
+                        style: GoogleFonts.nunito(
+                            color: Colors.white, fontSize: 22),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      HomeButtons(
+                          icon: "assets/icons/flight.png",
+                          content: "Flight",
+                          iconColor: Colors.white),
+                      HomeButtons(
+                          icon: "assets/icons/hotel.png",
+                          content: "Hotel",
+                          iconColor: Colors.white),
+                      HomeButtons(
+                          icon: "assets/icons/car.png",
+                          content: "Cars",
+                          iconColor: Colors.white),
+                      HomeButtons(
+                          icon: "assets/icons/train.png",
+                          content: "Train",
+                          iconColor: Colors.white),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20),
+                Expanded(
+                  child: Container(
+                    width: size.width,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30)),
+                    ),
+                    child: StaggeredGridView.countBuilder(
+                      padding: EdgeInsets.all(20),
+                      shrinkWrap: true,
+                      crossAxisCount: 2,
+                      itemCount: topDestinations.length,
+                      itemBuilder: (BuildContext context, int index) => InkWell(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PreviewScreen(
+                                      title: topDestinations[index]['title'],
+                                      image: topDestinations[index]['image'],
+                                      description: topDestinations[index]
+                                          ['description'],
+                                    ))),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                      topDestinations[index]['image']),
+                                  fit: BoxFit.cover),
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Stack(
+                            children: [
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Padding(
+                                  padding: EdgeInsets.only(bottom: 20),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.all(7),
+                                        constraints: BoxConstraints(
+                                            maxWidth: size.width * 0.2),
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey.withOpacity(0.7),
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        child: FittedBox(
+                                          fit: BoxFit.fitWidth,
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.location_on,
+                                                color: Colors.white,
+                                              ),
+                                              Text(
+                                                topDestinations[index]['title'],
+                                                style: GoogleFonts.nunito(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.w700),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () => _pressed(),
+                                        child: Icon(
+                                          isLiked
+                                              ? Icons.favorite
+                                              : Icons.favorite_border,
+                                          color: isLiked
+                                              ? kPrimaryColor
+                                              : Colors.white,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      staggeredTileBuilder: (int index) =>
+                          StaggeredTile.count(1, (index % 2 == 0) ? 1.5 : 1.2),
+                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 20,
+                    ),
+                  ),
+                )
+              ],
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 30),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              margin: EdgeInsets.all(20),
+              height: size.height * 0.07,
+              width: size.width * 0.6,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  HomeButtons(
-                      icon: "assets/icons/flight.png",
-                      content: "Flight",
-                      iconColor: Colors.white),
-                  HomeButtons(
-                      icon: "assets/icons/hotel.png",
-                      content: "Hotel",
-                      iconColor: Colors.white),
-                  HomeButtons(
-                      icon: "assets/icons/car.png",
-                      content: "Cars",
-                      iconColor: Colors.white),
-                  HomeButtons(
-                      icon: "assets/icons/train.png",
-                      content: "Train",
-                      iconColor: Colors.white),
+                  IconButton(icon: Icon(Icons.home), onPressed: null),
+                  IconButton(icon: Icon(Icons.add_circle, color: kPrimaryColor,), onPressed: null),
+                  IconButton(icon: Icon(Icons.person), onPressed: null),
                 ],
               ),
             ),
-            SizedBox(height: 20),
-            Expanded(
-              child: Container(
-                width: size.width,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30)),
-                ),
-                child: StaggeredGridView.countBuilder(
-                  padding: EdgeInsets.all(20),
-                  shrinkWrap: true,
-                  crossAxisCount: 2,
-                  itemCount: topDestinations.length,
-                  itemBuilder: (BuildContext context, int index) => InkWell(
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PreviewScreen(
-                                  title: topDestinations[index]['title'],
-                                  image: topDestinations[index]['image'],
-                                  description: topDestinations[index]
-                                      ['description'],
-                                ))),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image:
-                                  NetworkImage(topDestinations[index]['image']),
-                              fit: BoxFit.cover),
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Padding(
-                              padding: EdgeInsets.only(bottom: 20),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.all(7),
-                                    constraints: BoxConstraints(
-                                        maxWidth: size.width * 0.2),
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey.withOpacity(0.7),
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    child: FittedBox(
-                                      fit: BoxFit.fitWidth,
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.location_on,
-                                            color: Colors.white,
-                                          ),
-                                          Text(
-                                            topDestinations[index]['title'],
-                                            style: GoogleFonts.nunito(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w700),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () => _pressed(),
-                                    child: Icon(
-                                      isLiked
-                                          ? Icons.favorite
-                                          : Icons.favorite_border,
-                                      color: isLiked
-                                          ? kPrimaryColor
-                                          : Colors.white,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  staggeredTileBuilder: (int index) =>
-                      StaggeredTile.count(1, (index % 2 == 0) ? 1.5 : 1.2),
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
-                ),
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

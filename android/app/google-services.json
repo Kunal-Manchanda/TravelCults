@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "541048295976-us3fcog3fq94m0n5tbtd21g8tb1fdugr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.travel_cults",
+            "certificate_hash": "c0a8a07535ce35bd914e18ed91f0c4cd9b3aa9a2"
+          }
+        },
+        {
           "client_id": "541048295976-arf56ugegqj8l3cloqfj5st2v762cvi2.apps.googleusercontent.com",
           "client_type": 3
         }
